@@ -33,11 +33,13 @@ public class CuentaModificar extends CuentasCaso{
                     break;
                 }
             }
+
             for(Cliente cliente : clientes){
                 if (cliente.getDni() == dni) {
                     clienteParaMostrar = cliente;
                 }
             }
+
             if (cuentaEncontrada == null) {
                 System.out.println("No se encontró ninguna cuenta con el DNI proporcionado.");
                 esperarEnter();
@@ -46,6 +48,7 @@ public class CuentaModificar extends CuentasCaso{
                 CuentaMostrar.mostrarDatosCuenta(cuentaEncontrada, clienteParaMostrar);
                 System.out.println("¿Esta seguro que desea modificarla? S/N");
                 TipoRespuesta respuesta = ValidarTipoRespuesta.validarTipoRespuesta(scanner);
+                
                 if (respuesta==TipoRespuesta.SI) {
                     clearScreen();
 
@@ -54,11 +57,13 @@ public class CuentaModificar extends CuentasCaso{
                     System.out.println("Ingrese nuevo DNI del titular: ");
                     long dninuevo = ValidarDni.ingresarDNI(scanner);
                     boolean seguir = true;
+                    
                     for(Cliente cliente : clientes){
                         if (cliente.getDni() == dninuevo) {
                             seguir = true;
                         }
                     }
+
                     if (seguir == true) {
                         cuentaEncontrada.setDniAsociado(dni);
 
@@ -66,7 +71,7 @@ public class CuentaModificar extends CuentasCaso{
                         double saldo = ValidarDouble.validarDouble(scanner);
                         cuentaEncontrada.setSaldo(saldo);
 
-                        System.out.println("Ingrese nuevo tipo de cuenta: ");
+                        System.out.println("Ingrese nuevo tipo de cuenta Caja de Ahorro (CA) o Cuenta Corriente (CC): ");
                         TipoCuenta tipoCuenta = ValidarTipoCuenta.validarTipoCuenta(scanner);
                         cuentaEncontrada.setTipoCuenta(tipoCuenta);
 
@@ -82,6 +87,5 @@ public class CuentaModificar extends CuentasCaso{
 
             }
         }
-
     }
 }

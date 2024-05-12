@@ -4,15 +4,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import ar.edu.utn.frbb.tup.CASOS.ClientesCaso;
-import ar.edu.utn.frbb.tup.MODELOS.Cliente;
-import ar.edu.utn.frbb.tup.MODELOS.TipoRespuesta;
+import ar.edu.utn.frbb.tup.MODELOS.*;
 import ar.edu.utn.frbb.tup.MOSTRAR.ClienteMostrar;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDni;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarTipoRespuesta;
+import ar.edu.utn.frbb.tup.VALIDACIONES.*;
 
 public class ClienteEliminar extends ClientesCaso{
     
     public static void clienteEliminarPorDni(List<Cliente> clientes, Scanner scanner){
+
         if (clientes.size()==0) {
             System.out.println("No es posible eliminar un cliente.");
             esperarEnter();
@@ -38,6 +37,7 @@ public class ClienteEliminar extends ClientesCaso{
             ClienteMostrar.mostrarDatosCliente(clienteAEliminar);
             System.out.println("¿Esta seguro que desea eliminarlo? S/N");
             TipoRespuesta respuesta = ValidarTipoRespuesta.validarTipoRespuesta(scanner);
+            
             if (respuesta==TipoRespuesta.SI) {
                 clearScreen();
                 clientes.remove(clienteAEliminar);

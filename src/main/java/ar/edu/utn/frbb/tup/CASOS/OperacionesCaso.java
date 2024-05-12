@@ -1,19 +1,18 @@
 package ar.edu.utn.frbb.tup.CASOS;
 
-import java.util.Scanner;
+import java.util.*;
 
 import ar.edu.utn.frbb.tup.MenuInput;
-import ar.edu.utn.frbb.tup.OPERACIONES.Deposito;
-import ar.edu.utn.frbb.tup.OPERACIONES.Retiro;
-import ar.edu.utn.frbb.tup.OPERACIONES.Saldo;
-import ar.edu.utn.frbb.tup.OPERACIONES.Transferencia;
+import ar.edu.utn.frbb.tup.OPERACIONES.*;
 import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarOpcionNumerica;
 
 public class OperacionesCaso extends MenuInput{
     
     public static void operacionesCaso(Scanner scanner){
+
         boolean exit_operaciones=false;
         int opcion_operaciones;
+        
         while (exit_operaciones == false) {
             clearScreen();
             System.out.println("------ OPERACIONES ------");
@@ -21,7 +20,7 @@ public class OperacionesCaso extends MenuInput{
             System.out.println("2. Depositar");
             System.out.println("3. Transferir");
             System.out.println("4. Saldo");
-            System.out.println("5. Salir");
+            System.out.println("5. Menu Principal");
             System.out.print("Seleccione una opción (1-5): ");
 
             opcion_operaciones=ValidarOpcionNumerica.ingresarOpcion(scanner);

@@ -1,6 +1,5 @@
 package ar.edu.utn.frbb.tup.MODELOS;
 
-// Enum TipoPersona
 public enum TipoPersona {
     PERSONA_FISICA("F"),
     PERSONA_JURIDICA("J");

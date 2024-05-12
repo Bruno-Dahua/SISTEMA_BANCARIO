@@ -7,7 +7,9 @@ import java.util.Scanner;
 public class ValidarFecha {
 
     public static LocalDate ingresarFecha(Scanner scanner) {
+
         LocalDate fechaNacimiento;
+        
         do {
             String fechaStr = scanner.nextLine();
             try {

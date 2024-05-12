@@ -1,21 +1,20 @@
 package ar.edu.utn.frbb.tup.OPERACIONES;
 
-import java.util.List;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import ar.edu.utn.frbb.tup.CASOS.OperacionesCaso;
-import ar.edu.utn.frbb.tup.GESTOR.GestorClientes;
-import ar.edu.utn.frbb.tup.GESTOR.GestorCuentas;
-import ar.edu.utn.frbb.tup.MODELOS.Cliente;
-import ar.edu.utn.frbb.tup.MODELOS.Cuenta;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDni;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDouble;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarId;
+import ar.edu.utn.frbb.tup.GESTOR.*;
+import ar.edu.utn.frbb.tup.MODELOS.*;
+import ar.edu.utn.frbb.tup.VALIDACIONES.*;
 
 public class Transferencia extends OperacionesCaso{
+
     public static void transferir(Scanner scanner) {
+
     List<Cuenta> cuentas = GestorCuentas.getCuentas();
     List<Cliente> clientes = GestorClientes.getClientes();
+    List<Movimiento> movimientos = GestorMovimientos.getMovimientos();
 
     if (cuentas.isEmpty()) {
         clearScreen();
@@ -46,7 +45,7 @@ public class Transferencia extends OperacionesCaso{
             }
         }
 
-        if (seguirDniOrigen && seguirIdOrigen && cuentaOrigen.getSaldo()>0) {
+        if (seguirDniOrigen == true && seguirIdOrigen == true && cuentaOrigen.getSaldo()>0) {
             clearScreen();
             System.out.println("Ingrese DNI del destinatario: ");
             long dniDestinatario = ValidarDni.ingresarDNI(scanner);
@@ -64,6 +63,7 @@ public class Transferencia extends OperacionesCaso{
             if (seguirDniDestinatario) {
                 System.out.println("Ingrese el dinero que desea transferir: ");
                 double dinero = ValidarDouble.validarDouble(scanner);
+
                 if (dinero > cuentaOrigen.getSaldo()) {
                     clearScreen();
                     System.out.println("No hay fondos suficientes en la cuenta.");
@@ -85,12 +85,18 @@ public class Transferencia extends OperacionesCaso{
                     System.out.println("Desde la cuenta " + cuentaOrigen.getId() + " asociada al titular DNI " + cuentaOrigen.getDniAsociado());
                     System.out.println("Hacia la cuenta " + cuentaDestinatario.getId() + " asociada al titular DNI " + cuentaDestinatario.getDniAsociado());
                     esperarEnter();
+
+                    Movimiento movimientoSalida = new Movimiento(dniOrigen, "Transferencia", dinero, cuentaOrigen.getSaldo(), LocalDateTime.now(), '-');
+                    Movimiento movimientoEntrada = new Movimiento(dniDestinatario, "Transferencia", dinero, cuentaDestinatario.getSaldo(), LocalDateTime.now(), '+');
+                    movimientos.add(movimientoEntrada);
+                    movimientos.add(movimientoSalida);
                 }
             } else {
                 clearScreen();
                 System.out.println("El destinatario no tiene una cuenta asociada a ese DNI.");
                 esperarEnter();
             }
+            
         } else {
             clearScreen();
             System.out.println("No es posible acceder a la cuenta.");

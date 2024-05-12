@@ -1,20 +1,20 @@
 package ar.edu.utn.frbb.tup.OPERACIONES;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import ar.edu.utn.frbb.tup.CASOS.OperacionesCaso;
-import ar.edu.utn.frbb.tup.GESTOR.GestorClientes;
-import ar.edu.utn.frbb.tup.GESTOR.GestorCuentas;
+import ar.edu.utn.frbb.tup.GESTOR.*;
 import ar.edu.utn.frbb.tup.MODELOS.*;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDni;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDouble;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarId;
+import ar.edu.utn.frbb.tup.VALIDACIONES.*;
 
 public class Deposito extends OperacionesCaso{
+
     public static void depositar(Scanner scanner){
 
         List<Cuenta> cuentas = GestorCuentas.getCuentas();
         List<Cliente> clientes = GestorClientes.getClientes();
+        List<Movimiento> movimientos = GestorMovimientos.getMovimientos();
 
         if (cuentas.isEmpty()) {
             clearScreen();
@@ -62,6 +62,10 @@ public class Deposito extends OperacionesCaso{
                 System.out.println("Se deposito $ " + dinero + " a " + clienteDepositar.getNombre() + " " + clienteDepositar.getApellido());
                 System.out.println("En la cuenta " + cuentaDepositar.getId() + " asociada al titular DNI " + cuentaDepositar.getDniAsociado());
                 esperarEnter();
+
+                Movimiento movimiento = new Movimiento(dni, "Deposito", dinero, cuentaDepositar.getSaldo(), LocalDateTime.now(), '+');
+                movimientos.add(movimiento);
+
             }else{
                 System.out.println("No es posible acceder a la cuenta.");
                 esperarEnter();

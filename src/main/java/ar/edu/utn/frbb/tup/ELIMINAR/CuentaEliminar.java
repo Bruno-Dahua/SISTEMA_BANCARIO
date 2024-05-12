@@ -6,13 +6,14 @@ import ar.edu.utn.frbb.tup.CASOS.CuentasCaso;
 import ar.edu.utn.frbb.tup.GESTOR.GestorClientes;
 import ar.edu.utn.frbb.tup.MODELOS.*;
 import ar.edu.utn.frbb.tup.MOSTRAR.CuentaMostrar;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDni;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarTipoRespuesta;
+import ar.edu.utn.frbb.tup.VALIDACIONES.*;
 
 public class CuentaEliminar extends CuentasCaso{
+
     public static void cuentaEliminarPorDni(List<Cuenta> cuentas, Scanner scanner){
 
         List<Cliente> clientes = GestorClientes.getClientes();
+        
         if(cuentas.isEmpty()){
             System.out.println("No es posible eliminar una cuenta.");
             esperarEnter();

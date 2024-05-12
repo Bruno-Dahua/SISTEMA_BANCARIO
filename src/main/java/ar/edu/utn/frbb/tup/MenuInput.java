@@ -1,6 +1,6 @@
 package ar.edu.utn.frbb.tup;
 
-import java.util.Scanner;
+import java.util.*;
 
 import ar.edu.utn.frbb.tup.CASOS.ClientesCaso;
 import ar.edu.utn.frbb.tup.CASOS.CuentasCaso;
@@ -12,12 +12,13 @@ import ar.edu.utn.frbb.tup.VALIDACIONES.*;
 public class MenuInput extends BaseInput{
 
     public static void mostrarMenu() {
-        //List<Cliente> clientes = GestorClientes.getClientes();
+
         Scanner scanner = new Scanner(System.in);
         int opcion;
         boolean exit=false;
 
         while (!exit) {
+
             System.out.println("------ BANCO ------");
             System.out.println("1. Clientes");
             System.out.println("2. Cuentas");
@@ -32,24 +33,30 @@ public class MenuInput extends BaseInput{
                 case 1:
                     ClientesCaso.caso_clientes(scanner);
                     break;
+
                 case 2:
                     CuentasCaso.caso_cuentas(scanner);
                     break;
+
                 case 3:
                     OperacionesCaso.operacionesCaso(scanner);
                     break;
+
                 case 4:
                     MovimientosCaso.mostrarMovimientos(scanner);
                     break;
+
                 case 5: 
                     exit=true;
                     break;
+
                 default:
                     System.out.println("Opcion invalida. Por favor, intentelo nuevamente: ");
                     break;
             } 
         }
-        scanner.close(); // Cerrar el scanner al finalizar
+
+        scanner.close(); // Cierro el scanner al finalizar
     }
 }
 

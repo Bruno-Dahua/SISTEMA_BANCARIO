@@ -1,6 +1,7 @@
 package ar.edu.utn.frbb.tup;
 
 import java.util.Scanner;
+
 public class BaseInput {
     
     protected static Scanner scanner = new Scanner(System.in);

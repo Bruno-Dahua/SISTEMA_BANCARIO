@@ -7,22 +7,21 @@ import java.util.Scanner;
 import ar.edu.utn.frbb.tup.CASOS.ClientesCaso;
 import ar.edu.utn.frbb.tup.MODELOS.Cliente;
 import ar.edu.utn.frbb.tup.MODELOS.TipoPersona;
-/*import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDni;
+import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDni;
 import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarFecha;
 import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarString;
 import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarTelefono;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarTipoPersona;*/
+import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarTipoPersona;
 
 public class ClienteIngresar extends ClientesCaso{
     public static Cliente ingresarCliente(List<Cliente> clientes, Scanner scanner) {
 
-        /*System.out.println("------ Ingreso de Cliente ------");
+        System.out.println("------ Ingreso de Cliente ------");
 
         int id;
         if (clientes.isEmpty()) {
-            id = 1; // Si la lista está vacía, el nuevo cliente tendrá ID 1
+            id = 1; 
         } else {
-            // Obtener el ID más alto y sumarle 1 para obtener el nuevo ID
             id = clientes.get(clientes.size() - 1).getId() + 1;
         }
 
@@ -57,12 +56,12 @@ public class ClienteIngresar extends ClientesCaso{
         System.out.println("Cliente ingresado correctamente. ");
         esperarEnter();
         
-        return cliente;*/
+        return cliente;
 
-        Cliente cliente1 = new Cliente(1, "Bruno", "Dahua", 45889159, LocalDate.of(2005, 01, 03), 2932405452L, "Alb XV casa 13", TipoPersona.fromString("f"), LocalDate.of(2024, 05, 12));
+/*      Cliente cliente1 = new Cliente(1, "Bruno", "Dahua", 45889159, LocalDate.of(2005, 01, 03), 2932405452L, "Alb XV casa 13", TipoPersona.fromString("f"), LocalDate.of(2024, 05, 12));
         Cliente cliente2 = new Cliente(2, "Diana", "Juan", 18458131, LocalDate.of(1967, 12, 8), 2932613546L, "Alb XV casa 13", TipoPersona.fromString("J"), LocalDate.of(2024, 05, 12));
         clientes.add(cliente2);
-        return cliente1;
+        return cliente1;*/
         
     }
 }

@@ -5,7 +5,9 @@ import java.util.Scanner;
 public class ValidarDni {
 
     public static long ingresarDNI(Scanner scanner) {
+
         long dni;
+        
         do {
             if (scanner.hasNextLong()) {
                 dni = scanner.nextLong();

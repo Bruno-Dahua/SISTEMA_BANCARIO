@@ -5,7 +5,9 @@ import java.util.Scanner;
 public class ValidarTelefono {
 
     public static long ingresarTelefono(Scanner scanner) {
+
         long telefono;
+        
         do {
             String telefonoStr = scanner.nextLine();
             // Quitamos todos los caracteres no numéricos del número ingresado

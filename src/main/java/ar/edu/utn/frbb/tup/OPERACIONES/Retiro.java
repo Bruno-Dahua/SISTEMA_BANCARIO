@@ -1,21 +1,21 @@
 package ar.edu.utn.frbb.tup.OPERACIONES;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
 import ar.edu.utn.frbb.tup.CASOS.OperacionesCaso;
-import ar.edu.utn.frbb.tup.GESTOR.GestorClientes;
-import ar.edu.utn.frbb.tup.GESTOR.GestorCuentas;
-import ar.edu.utn.frbb.tup.MODELOS.Cliente;
-import ar.edu.utn.frbb.tup.MODELOS.Cuenta;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDni;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDouble;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarId;
+import ar.edu.utn.frbb.tup.GESTOR.*;
+import ar.edu.utn.frbb.tup.MODELOS.*;
+import ar.edu.utn.frbb.tup.VALIDACIONES.*;
 
 public class Retiro extends OperacionesCaso{
+
     public static void retirar(Scanner scanner){
+
         List<Cuenta> cuentas = GestorCuentas.getCuentas();
         List<Cliente> clientes = GestorClientes.getClientes();
+        List<Movimiento> movimientos = GestorMovimientos.getMovimientos();
 
         if (cuentas.isEmpty()) {
             clearScreen();
@@ -54,8 +54,10 @@ public class Retiro extends OperacionesCaso{
                         clienteRetirar = cliente;
                     }
                 }
+
                 System.out.println("Ingrese el dinero que desea retirar: ");
                 double dinero = ValidarDouble.validarDouble(scanner);
+
                 if (dinero<cuentaRetirar.getSaldo()) {
                     cuentaRetirar.setSaldo(cuentaRetirar.getSaldo() - dinero);
                     clearScreen();
@@ -63,11 +65,16 @@ public class Retiro extends OperacionesCaso{
                     System.out.println("Se retiro $ " + dinero + " a " + clienteRetirar.getNombre() + " " + clienteRetirar.getApellido());
                     System.out.println("De la cuenta " + cuentaRetirar.getId() + " asociada al titular DNI " + cuentaRetirar.getDniAsociado());
                     esperarEnter();
+
+                    Movimiento movimiento = new Movimiento(dni, "Retiro", dinero, cuentaRetirar.getSaldo(), LocalDateTime.now(), '-');
+                    movimientos.add(movimiento);
+                    
                 }else{
                     clearScreen();
                     System.out.println("No hay fondos suficientes.");
                     esperarEnter();
                 }
+                
             }else{
                 clearScreen();
                 System.out.println("No es posible acceder a la cuenta.");

@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import ar.edu.utn.frbb.tup.CASOS.OperacionesCaso;
-import ar.edu.utn.frbb.tup.GESTOR.GestorClientes;
-import ar.edu.utn.frbb.tup.GESTOR.GestorCuentas;
+import ar.edu.utn.frbb.tup.GESTOR.*;
 import ar.edu.utn.frbb.tup.MODELOS.*;
 import ar.edu.utn.frbb.tup.VALIDACIONES.*;
 
 public class Saldo extends OperacionesCaso{
+
     public static void consultarSaldo(Scanner scanner){
+
         List<Cuenta> cuentas = GestorCuentas.getCuentas();
         List<Cliente> clientes = GestorClientes.getClientes();
 
@@ -18,6 +19,7 @@ public class Saldo extends OperacionesCaso{
         long dni;
         int id;
         Cuenta cuentaConsultar = null;
+
         if (cuentas.isEmpty()) {
             clearScreen();
             System.out.println("No es posible realizar la operacion.");
@@ -54,12 +56,15 @@ public class Saldo extends OperacionesCaso{
         }
 
         if (seguir == true) {
+
             Cliente clienteConsultar = null;
+
             for(Cliente cliente : clientes){
                 if (cliente.getDni() == dni && cliente.getId() == id) {
                     clienteConsultar = cliente;
                 }
             }
+            
             clearScreen();
             System.out.println("Titular de la cuenta: " + clienteConsultar.getNombre() + " " + clienteConsultar.getApellido());
             System.out.println("DNI: " + cuentaConsultar.getDniAsociado());

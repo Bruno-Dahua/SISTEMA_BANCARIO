@@ -5,8 +5,10 @@ import java.util.Scanner;
 public class ValidarOpcionNumerica {
     
     public static int ingresarOpcion(Scanner scanner) {
+
         int opcion = 0;
         boolean valido = false;
+        
         do {
             if (scanner.hasNextInt()) {
                 opcion=scanner.nextInt();

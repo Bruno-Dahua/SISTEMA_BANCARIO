@@ -5,20 +5,19 @@ import java.util.Scanner;
 
 import ar.edu.utn.frbb.tup.CASOS.CuentasCaso;
 import ar.edu.utn.frbb.tup.GESTOR.GestorClientes;
-import ar.edu.utn.frbb.tup.MODELOS.Cuenta;
-import ar.edu.utn.frbb.tup.MODELOS.TipoCuenta;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDni;
-import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarTipoCuenta;
-import ar.edu.utn.frbb.tup.MODELOS.Cliente;
+import ar.edu.utn.frbb.tup.MODELOS.*;
+import ar.edu.utn.frbb.tup.VALIDACIONES.*;
 
 public class CuentaIngresar extends CuentasCaso{
     
-    public static Cuenta ingresarCuenta(List<Cuenta> cuentas, Scanner scanner){
+    public static void ingresarCuenta(List<Cuenta> cuentas, Scanner scanner){
+
         List<Cliente> clientes = GestorClientes.getClientes();
+
         if (clientes.isEmpty()) {
             System.out.println("No es posible crear la cuenta.");
             esperarEnter();
-            return null;
+            return;
         }else{
             System.out.println("------ Ingreso de Cuenta ------");
 
@@ -35,12 +34,11 @@ public class CuentaIngresar extends CuentasCaso{
             }
 
             if (clienteAsociado != null) {
-                // Generar el ID de la cuenta
                 int id;
                 if (cuentas.isEmpty()) {
-                    id = 1; // Si la lista está vacía, el nuevo cliente tendrá ID 1
+                    id = 1; 
+                    
                 } else {
-                    // Obtener el ID más alto y sumarle 1 para obtener el nuevo ID
                     id = cuentas.get(cuentas.size() - 1).getId() + 1;
                 }
 
@@ -49,19 +47,20 @@ public class CuentaIngresar extends CuentasCaso{
                 System.out.print("Ingrese el tipo de cuenta Caja de Ahorro (CA) o Cuenta Corriente (CC): ");
                 TipoCuenta tipoCuenta = ValidarTipoCuenta.validarTipoCuenta(scanner);
 
-                // Crear la cuenta con el cliente asociado
+                // Crear la cuenta con el cliente asociado y devolverla
                 Cuenta cuenta = new Cuenta(id, dni, saldo, tipoCuenta);
 
                 clearScreen();
                 System.out.println("Cuenta ingresada correctamente.");
                 esperarEnter();
 
-                return cuenta;
+                cuentas.add(cuenta);
+                
             } else {
                 clearScreen();
                 System.out.println("No se encontró un cliente asociado con el DNI proporcionado.");
                 esperarEnter();
-                return null;
+                return;
             }
         }
     }

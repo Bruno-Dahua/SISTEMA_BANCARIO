@@ -1,16 +1,15 @@
 package ar.edu.utn.frbb.tup.MOSTRAR;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import ar.edu.utn.frbb.tup.CASOS.ClientesCaso;
-import ar.edu.utn.frbb.tup.MODELOS.Cliente;
-import ar.edu.utn.frbb.tup.MODELOS.TipoPersona;
+import ar.edu.utn.frbb.tup.MODELOS.*;
 import ar.edu.utn.frbb.tup.VALIDACIONES.ValidarDni;
 
 public class ClienteMostrar extends ClientesCaso{
 
     public static void mostrarClientePorDNI(List<Cliente> clientes, Scanner scanner) {
+
         if (clientes.size()==0) {
             System.out.println("No es posible mostrar un cliente.");
             esperarEnter();
@@ -42,6 +41,7 @@ public class ClienteMostrar extends ClientesCaso{
     
 
     public static void mostrarDatosCliente(Cliente cliente) {
+        
         System.out.println("------ Datos del Cliente ------");
         System.out.println("ID: " + cliente.getId());
         System.out.println("Nombre: " + cliente.getNombre());
